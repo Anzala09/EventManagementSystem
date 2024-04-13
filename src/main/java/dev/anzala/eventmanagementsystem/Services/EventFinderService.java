@@ -1,5 +1,6 @@
 package dev.anzala.eventmanagementsystem.Services;
 
+import dev.anzala.eventmanagementsystem.Dtos.EventCreateRequestDto;
 import dev.anzala.eventmanagementsystem.Dtos.EventFinderRequestDto;
 import dev.anzala.eventmanagementsystem.Dtos.ResponseDto;
 import dev.anzala.eventmanagementsystem.Models.Event;
@@ -65,5 +66,15 @@ public class EventFinderService {
     }
 
 
+    public void createEvent(EventCreateRequestDto eventCreateRequestDto) {
+        Event event = new Event();
+        event.setEvent_name(eventCreateRequestDto.getEvent_name());
+        event.setCity_name(eventCreateRequestDto.getCity_name());
+        event.setDate(eventCreateRequestDto.getDate());
+        event.setTime(eventCreateRequestDto.getTime());
+        event.setLatitude(eventCreateRequestDto.getLatitude());
+        event.setLongitude(eventCreateRequestDto.getLongitude());
+        eventRepository.save(event);
+    }
 }
 

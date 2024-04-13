@@ -1,5 +1,6 @@
 package dev.anzala.eventmanagementsystem.Controller;
 
+import dev.anzala.eventmanagementsystem.Dtos.EventCreateRequestDto;
 import dev.anzala.eventmanagementsystem.Dtos.EventFinderRequestDto;
 import dev.anzala.eventmanagementsystem.Dtos.ResponseDto;
 import dev.anzala.eventmanagementsystem.Models.Event;
@@ -27,8 +28,10 @@ public class EventController {
 
    private ResponseDto responseDto;
    private WeatherService weatherService;
+   private  EventCreateRequestDto eventCreateRequestDto;
 
-    public EventController(EventReaderService eventReaderService, EventFinderService eventFinderService, WeatherService weatherService) {
+    public EventController(EventReaderService eventReaderService, EventFinderService eventFinderService,
+                           WeatherService weatherService ) {
         this.eventReaderService = eventReaderService;
         this.eventFinderService = eventFinderService;
         this.weatherService = weatherService;
@@ -88,9 +91,11 @@ public class EventController {
 
 
     @PostMapping("/create")
-    public void createEvent() {
+    public void createEvent(@RequestBody EventCreateRequestDto eventCreateRequestDto) {
         // create event
+         eventFinderService.createEvent(eventCreateRequestDto);
+        //System.out.println("Data is processing in  DB");
+       // eventReaderService.readCsvAndSaveInDb("https://drive.google.com/file/d/1sZXyOT_V1NcZj3dDQIKY9Ea_W7XdGum_/view?usp=drive_link");
         System.out.println("Data is processing in  DB");
-        eventReaderService.readCsvAndSaveInDb("https://drive.google.com/file/d/1sZXyOT_V1NcZj3dDQIKY9Ea_W7XdGum_/view?usp=drive_link");
     }
 }

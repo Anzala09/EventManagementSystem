@@ -5,6 +5,7 @@ import com.opencsv.bean.CsvCustomBindByName;
 import dev.anzala.eventmanagementsystem.Configuration.LocalDateConverter;
 import dev.anzala.eventmanagementsystem.Configuration.LocalTimeConverter;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -34,7 +35,8 @@ public class Event extends BaseModel{
     @CsvBindByName(column = "longitude")
     private double longitude;
 
+    @Transient
     private String weather;
-
+   @Transient
     private double distance_km;
 }
